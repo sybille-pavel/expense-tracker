@@ -7,10 +7,12 @@
     use App\Http\Requests\StoreExpenseRequest;
     use App\Http\Requests\UpdateExpenseRequest;
     use App\Http\Resources\ExpenseResource;
+    use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
     use Illuminate\Http\Request;
 
     class ExpenseController extends Controller
     {
+        use AuthorizesRequests;
         public function index(Request $request)
         {
             $expenses = Expense::where('user_id', $request->user()->id)

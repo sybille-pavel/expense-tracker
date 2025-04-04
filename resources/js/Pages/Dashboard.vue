@@ -41,6 +41,10 @@ const monthStats = computed(() => {
     };
 });
 
+const removeExpense = (id) => {
+    expenses.value = expenses.value.filter(expense => expense.id !== id);
+};
+
 onMounted(fetchExpenses);
 </script>
 
@@ -55,7 +59,7 @@ onMounted(fetchExpenses);
         <div class="py-12 space-y-8 max-w-4xl mx-auto">
             <MonthlyStats :stats="monthStats" />
             <ExpenseForm @submit="addExpense" :loading="loading" />
-            <ExpenseTable :expenses="expenses" />
+            <ExpenseTable :expenses="expenses" @deleted="removeExpense" />
         </div>
     </AuthenticatedLayout>
 </template>
